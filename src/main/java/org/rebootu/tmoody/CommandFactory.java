@@ -5,12 +5,13 @@ package org.rebootu.tmoody;
  */
 public class CommandFactory {
 
-    public Command getCommand(String input, MyBot bot){
-        if (input.equalsIgnoreCase("!time")){
+    public Command getCommand(String input, MyBot bot) {
+        if (input.equalsIgnoreCase("!time")) {
             return new TimeCommand(bot);
-        }
-        else if (input.equalsIgnoreCase("!viewers")){
+        } else if (input.equalsIgnoreCase("!viewers")) {
             return new ViewersCommand(bot);
+        } else if (input.equalsIgnoreCase("!points")) {
+            return new PointCommand(bot);
         }
         return null;
     }
