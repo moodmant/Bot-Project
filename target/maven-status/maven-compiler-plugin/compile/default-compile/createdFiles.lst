@@ -1,0 +1,10 @@
+org/rebootu/tmoody/PointCommand.class
+org/rebootu/tmoody/util/ApplicationContextProvider.class
+org/rebootu/tmoody/models/ViewerDao.class
+org/rebootu/tmoody/models/Viewer.class
+org/rebootu/tmoody/bo/ViewerBoImpl.class
+org/rebootu/tmoody/models/AbstractEntity.class
+org/rebootu/tmoody/controller/BotController$1.class
+org/rebootu/tmoody/models/Text.class
+org/rebootu/tmoody/bo/ViewerBo.class
+org/rebootu/tmoody/controller/BotController.class
