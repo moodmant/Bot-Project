@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 
 /**
  * Created by taylor on 6/15/15.
@@ -13,4 +14,5 @@ import javax.transaction.Transactional;
 @Repository
 public interface ViewerDao extends CrudRepository<Viewer, Integer> {
     Viewer findByViewerName(String viewerName);
+    ArrayList<Viewer> findAll();
 }

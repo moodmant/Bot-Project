@@ -19,7 +19,6 @@ public class MyBot extends PircBot {
         this.setName("CognoscoBot");
     }
 
-
     public void onMessage(String channel, String sender, String login, String hostname, String message) {
         CommandFactory commandFactory = new CommandFactory();
         Command command = commandFactory.getCommand(message, this);
@@ -43,6 +42,7 @@ public class MyBot extends PircBot {
         }
         // Join the #pircbot channel.
         this.joinChannel(CHANNEL);
+        this.sendRawLine("CAP REQ :twitch.tv/membership");
         this.sendMessage(CHANNEL, "hello again");
     }
 

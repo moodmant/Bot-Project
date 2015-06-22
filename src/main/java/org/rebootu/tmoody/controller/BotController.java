@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-;import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+;
 
 /**
  * Created by taylor on 6/9/15.
@@ -23,6 +26,9 @@ public class BotController {
 
     private MyBot bot;
     public boolean inChat = false;
+    public ViewerBo viewerBo;
+
+
 
     @RequestMapping(value = "/")
     public String index(Model model) {
@@ -41,6 +47,7 @@ public class BotController {
             return "joined_form";}
         else {
             System.out.println("check for already joined.");
+
             return "joined_form";
         }
     }
@@ -53,14 +60,13 @@ public class BotController {
         //@Table(name = "points")
         Runnable SQLPoints = new Runnable() {
             public void run() {
-                int i;
 
                 ApplicationContext ctx = ApplicationContextProvider.getApplicationContext();
-
                 ViewerBo viewerBo = (ViewerBo)ctx.getBean("viewerBo");
 
+
                 User[] list = bot.getUsers(MyBot.CHANNEL);
-                for (i = 0; i < list.length; i++) {
+                for (int i = 0; i < list.length; i++) {
                     User user = list[i];
                     Viewer viewer = viewerBo.findByViewerName(user.getNick());
                     if (viewer == null) {
@@ -76,7 +82,7 @@ public class BotController {
             }
         };
 
-        executor.scheduleAtFixedRate(SQLPoints, 0, 30, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(SQLPoints, 0, 5, TimeUnit.MINUTES);
     }
 
     @RequestMapping(value = "/leave")
@@ -88,5 +94,13 @@ public class BotController {
             inChat = false;
             return "standby";}
         else { return "standby";}
+    }
+
+    @RequestMapping(value = "/points")
+    public String points(Model model) throws Exception{
+        ArrayList<Viewer> viewers;
+        viewers = viewerBo.findAll();
+        model.addAttribute("viewers", viewers);
+        return "points";
     }
 }

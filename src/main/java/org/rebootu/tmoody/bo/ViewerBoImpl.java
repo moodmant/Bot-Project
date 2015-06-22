@@ -5,6 +5,8 @@ import org.rebootu.tmoody.models.ViewerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 /**
  * Created by taylor on 6/15/15.
  */
@@ -27,5 +29,10 @@ public class ViewerBoImpl implements ViewerBo {
     @Override
     public Viewer findByViewerName(String viewerName) {
         return this.viewerDao.findByViewerName(viewerName);
+    }
+
+    @Override
+    public ArrayList<Viewer> findAll(){
+        return this.viewerDao.findAll();
     }
 }
