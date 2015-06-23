@@ -5,6 +5,7 @@ import org.rebootu.tmoody.MyBot;
 import org.rebootu.tmoody.bo.ViewerBo;
 import org.rebootu.tmoody.models.Viewer;
 import org.rebootu.tmoody.util.ApplicationContextProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 ;
@@ -24,8 +26,13 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class BotController {
 
+    @Autowired
     private MyBot bot;
+
     public boolean inChat = false;
+    private ScheduledFuture<?> scheduledFuture;
+
+    @Autowired
     public ViewerBo viewerBo;
 
 
@@ -39,7 +46,6 @@ public class BotController {
     public String joined(Model model) throws Exception {
 
         if (inChat == false) {
-            this.bot = new MyBot();
             inChat = true;
             bot.start();
             this.startCycle();
@@ -82,7 +88,7 @@ public class BotController {
             }
         };
 
-        executor.scheduleAtFixedRate(SQLPoints, 0, 5, TimeUnit.MINUTES);
+        this.scheduledFuture = executor.scheduleAtFixedRate(SQLPoints, 0, 5, TimeUnit.MINUTES);
     }
 
     @RequestMapping(value = "/leave")
@@ -90,7 +96,8 @@ public class BotController {
 
         if (inChat == true){
             this.bot.leave();
-            this.executor.shutdownNow();
+            //this.executor.shutdownNow();
+            this.scheduledFuture.cancel(false);
             inChat = false;
             return "standby";}
         else { return "standby";}

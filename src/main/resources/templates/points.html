@@ -21,9 +21,9 @@
 
             </tr>
             <tr th:each="viewer : ${viewers}">
-                <td th:text="${viewer.key}">#</td>
-                <td th:text="${viewer.value.viewer_name}">Name</td>
-                <td th:text="${viewer.value.points}">Points</td>
+                <!--<td th:text="${viewer.Id}">#</td>-->
+                <td th:text="${viewer.viewerName}">Name</td>
+                <td th:text="${viewer.points}">Points</td>
             </tr>
         </table>
 

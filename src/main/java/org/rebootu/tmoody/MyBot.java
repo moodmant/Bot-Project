@@ -7,10 +7,12 @@ package org.rebootu.tmoody;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+@Service("MyBot")
 public class MyBot extends PircBot {
 
     public static final String CHANNEL = "#moodmant";
