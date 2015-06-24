@@ -26,6 +26,7 @@ public class Viewer extends AbstractEntity {
     public int getPoints() {return points;}
     public void setPoints(int points) {this.points = points;}
 
+
     @NotNull
     @Column(name = "viewer_name", unique = true, nullable = false)
     public String getViewerName(){return viewerName;}

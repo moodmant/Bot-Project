@@ -2,7 +2,15 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="en">
     <meta charset="UTF-8"/>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
     <title></title>
+    <style>
+        table tr td {
+            text-align: center;
+        }
+
+         table tr td:first-child {text-align: left}
+    </style>
 </head>
 <body>
 
@@ -15,13 +23,10 @@
         <p>Points table</p>
         <table class="table table.striped">
             <tr>
-                <th>#</th>
                 <th>Name</th>
                 <th>Points</th>
-
             </tr>
             <tr th:each="viewer : ${viewers}">
-                <!--<td th:text="${viewer.Id}">#</td>-->
                 <td th:text="${viewer.viewerName}">Name</td>
                 <td th:text="${viewer.points}">Points</td>
             </tr>
